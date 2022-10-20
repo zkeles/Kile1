@@ -1,0 +1,155 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="content">
+	<div class="panel-header bg-primary-gradient">
+		<div class="page-inner py-5">
+			<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+				<div>
+
+					<h2 class="text-white pb-2 fw-bold">FIRIN SATIS RAPORU</h2>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="page-inner">
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<form action="/txtraporsend1" method="post">
+						<div class="card-body">
+							<div class="row">
+								<div class="col-lg-8 ">
+									<div class="form-group">
+										<label for="selectedfirin">Firin Seciniz</label>
+										<select multiple class="form-control" id="selectedfirin" name="selectedfirin">
+
+											{% for row in firin %}
+											<option value="{{row[0]}}">{{row[1]}}</option>
+											{% endfor %}
+										</select>
+									</div>
+
+								</div>
+								
+								<div class="col-md-6 col-lg-4">
+									<div class="form-group">
+										<div class="card-body">
+											<label>
+												<h4> Rapor Baslangic Tarihi Seçiniz</h4>
+											</label>
+											<input class="form-control datepicker" type="date" id="basdate"
+												name="basdate" value="Today">
+											<br>
+											<label>
+												<h4> Rapor Bitiş Tarihi Seçiniz</h4>
+											</label>
+											<input class="form-control" type="date" id="bitdate" name="bitdate"
+												value="Today">
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<button class="btn btn-primary" id="ziyakeles" name="web" type="submit" > Rapor
+								Getir</button>
+							<button class="btn btn-warning" id="ziyakeles" name="Excel" type="submit"> Excel
+								Getir</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+	{% endblock content %}
+
+	<!-- Specific Page JS goes HERE  -->
+	{% block javascripts %}
+	{% include 'includes/scripts.html' %}
+
+
+	<script>
+		var date = new Date();
+		var day = date.getDate();
+		var month = date.getMonth() + 1;
+		var year = date.getFullYear();
+
+		if (month < 10) month = "0" + month;
+		if (day < 10) day = "0" + day;
+
+		var today = year + "-" + month + "-" + day;
+
+		document.getElementById("basdate").value = today
+		document.getElementById("bitdate").value = today;
+	</script>
+	<script>
+		$(document).ready(function () {
+			$('#basic-datatables').DataTable({
+			});
+
+			$('#multi-filter-select').DataTable({
+				"pageLength": 5,
+				initComplete: function () {
+					this.api().columns().every(function () {
+						var column = this;
+						var select = $('<select class="form-control"><option value=""></option></select>')
+							.appendTo($(column.footer()).empty())
+							.on('change', function () {
+								var val = $.fn.dataTable.util.escapeRegex(
+									$(this).val()
+								);
+
+								column
+									.search(val ? '^' + val + '$' : '', true, false)
+									.draw();
+							});
+
+						column.data().unique().sort().each(function (d, j) {
+							select.append('<option value="' + d + '">' + d + '</option>')
+						});
+					});
+				}
+			});
+
+			// Add Row
+			$('#add-row').DataTable({
+				"pageLength": 5,
+			});
+
+			var action = '<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
+
+			$('#addRowButton').click(function () {
+				$('#add-row').dataTable().fnAddData([
+					$("#addName").val(),
+					$("#addPosition").val(),
+					$("#addOffice").val(),
+					action
+				]);
+				$('#addRowModal').modal('hide');
+
+			});
+		});
+	</script>
+	<script>
+		$(document).ready(function () {
+			$("td.contribution").each(function () { $(this).html(parseFloat($(this).text()).toLocaleString('tr-TR')); })
+		})
+	</script>
+	<script src="../static/assets/js/setting-demo2.js"></script>
+
+	{% endblock javascripts %}

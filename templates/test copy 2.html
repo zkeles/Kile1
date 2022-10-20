@@ -1,0 +1,269 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Roboto:300,500');
+
+    @color-card-background: #2d3638;
+    @color-tag-background: #191e20;
+    @color-anchor: #e37544;
+    @color-body-copy: #b9bcbd;
+    @default-border-radius: 10px;
+    @breakpoint-medium: "screen and (min-width: 700px)";
+
+    html,
+    body {
+        background-color: #fff;
+    }
+
+    .form-popup-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+    }
+
+    .form-popup-bg {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(94, 110, 141, 0.9);
+        opacity: 0;
+        visibility: hidden;
+        -webkit-transition: opacity 0.3s 0s, visibility 0s 0.3s;
+        -moz-transition: opacity 0.3s 0s, visibility 0s 0.3s;
+        transition: opacity 0.3s 0s, visibility 0s 0.3s;
+        overflow-y: auto;
+        z-index: 10000;
+    }
+
+    .form-popup-bg.is-visible {
+        opacity: 1;
+        visibility: visible;
+        -webkit-transition: opacity 0.3s 0s, visibility 0s 0s;
+        -moz-transition: opacity 0.3s 0s, visibility 0s 0s;
+        transition: opacity 0.3s 0s, visibility 0s 0s;
+    }
+
+    .form-container {
+        background-color: rgb(39, 100, 219);
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        padding: 40px;
+        color: #fff;
+    }
+
+    .close-button {
+        background: none;
+        color: #fff;
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        border: solid 1px #fff;
+    }
+
+    .form-popup-bg:before {
+        content: '';
+        background-color: #fff;
+        opacity: .25;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+</style>
+{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="content">
+    <div class="container col-md-12">
+        <div class="panel-header bg-primary-gradient">
+            <div class="page-inner py-5">
+                <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+                    <div>
+                        <h2 class="text-white pb-2 fw-bold">Kullanıcı Ekleme </h2>
+                        <h5 class="text-white op-7 mb-2">Micro Görev Yöneitic Ekranı</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="/aekle" method="post">
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="firstname" placeholder="Adı" value="{{ data1[0][2]}}" required>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="lastname" placeholder="Soyadı"  value="{{ data1[0][3]}}" required>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="email" placeholder="E-mail" value="{{ data1[0][4]}}" required
+                                    autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="telefon" value="{{ data1[0][7]}}" placeholder="Telefon">
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control" type="text" name="member"  value="{{ data1[0][8]}}" placeholder="Role">
+                                    <option value="{{ data1[0][8]}}">{{ data1[0][8]}} </option>
+                                    <option value="executive">Yönetici</option>
+                                    <option value="auditor">Denetçi</option>
+                                    <option value="responsible">Sorumlu</option>
+                                </select>
+                            </div>
+
+                            <button class="btn btn-info btn-round"  type="submit">
+                                Düzelt
+                            </button>
+
+                        </form>
+                        <br>
+                        <a class="btn btn-info btn-round" href="/kekle">
+                            Yeni Kullanıcı
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex align-items-center">
+                            <h4 class="card-title"> Kullanıcı Listesi</h4>
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!-- Modal -->
+
+
+                        <div class="table-responsive">
+                            <table id="add-row" class="display table table-striped table-hover">
+                                <thead>
+
+                                    <tr>
+                                        <th>Adi</th>
+                                        <th>Soyadi</th>
+                                        <th>Role</th>
+                                        <th style="width: 5%">Action</th>
+                                    </tr>
+
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>Adi</th>
+                                        <th>Soyadi</th>
+                                        <th>Role</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    {% for row in data %}
+                                    <tr>
+
+                                        <td>{{row[2]}}</td>
+                                        <td>{{row[3]}}</td>
+                                        <td>{{row[8]}}</td>
+                                        <td>
+                                            <div class="form-button-action">
+                                                <a onclick="location.href='/kduz/{{row[0]}}'" type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Kullanıcı Düzenle" >
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                                <a href='/kduz/{{row[0]}}' onclick="return confirm('Parola yenileme e-postası gönderilectir. Eminmisiniz?')" type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Parola Resetleme" >
+                                                    <i class="fa fa-key"></i>
+                                                </a>
+                                                <a type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger delete" data-original-title="Kullanıcı Silme" href="#"
+                                                    onclick="return confirm('Bu kullanıcıyı silmek istediğinizden eminmisiniz...')">
+                                                    <i class="fa fa-times"></i>
+                                            </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+{% include 'includes/scripts.html' %}
+<script>
+    $(document).ready(function () {
+        // Javascript method's body can be found in assets/js/demos.js
+        md.initDashboardPageCharts();
+
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('#basic-datatables').DataTable({
+        });
+
+        $('#multi-filter-select').DataTable({
+            "pageLength": 5,
+            initComplete: function () {
+                this.api().columns().every(function () {
+                    var column = this;
+                    var select = $('<select class="form-control"><option value=""></option></select>')
+                        .appendTo($(column.footer()).empty())
+                        .on('change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+
+                            column
+                                .search(val ? '^' + val + '$' : '', true, false)
+                                .draw();
+                        });
+
+                    column.data().unique().sort().each(function (d, j) {
+                        select.append('<option value="' + d + '">' + d + '</option>')
+                    });
+                });
+            }
+        });
+
+        // Add Row
+        $('#add-row').DataTable({
+            "pageLength": 4,
+        });
+
+    });
+</script>
+
+{% endblock javascripts %}

@@ -1,0 +1,246 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Roboto:300,500');
+
+    @color-card-background: #2d3638;
+    @color-tag-background: #191e20;
+    @color-anchor: #e37544;
+    @color-body-copy: #b9bcbd;
+    @default-border-radius: 10px;
+    @breakpoint-medium: "screen and (min-width: 700px)";
+
+    html,
+    body {
+        background-color: #fff;
+    }
+    .form-popup-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+    }
+
+    .form-popup-bg {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(94, 110, 141, 0.9);
+        opacity: 0;
+        visibility: hidden;
+        -webkit-transition: opacity 0.3s 0s, visibility 0s 0.3s;
+        -moz-transition: opacity 0.3s 0s, visibility 0s 0.3s;
+        transition: opacity 0.3s 0s, visibility 0s 0.3s;
+        overflow-y: auto;
+        z-index: 10000;
+    }
+
+    .form-popup-bg.is-visible {
+        opacity: 1;
+        visibility: visible;
+        -webkit-transition: opacity 0.3s 0s, visibility 0s 0s;
+        -moz-transition: opacity 0.3s 0s, visibility 0s 0s;
+        transition: opacity 0.3s 0s, visibility 0s 0s;
+    }
+
+    .form-container {
+        background-color: rgb(39, 100, 219);
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        padding: 40px;
+        color: #fff;
+    }
+
+    .close-button {
+        background: none;
+        color: #fff;
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        border: solid 1px #fff;
+    }
+
+    .form-popup-bg:before {
+        content: '';
+        background-color: #fff;
+        opacity: .25;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+</style>
+{% endblock stylesheets %}
+
+{% block content %}
+
+
+
+
+{% if kekle %}
+<div class="content">
+    <div class="container col-md-12">
+        <div class="panel-header bg-primary-gradient">
+            <div class="page-inner py-5">
+                <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+                    <div>
+                        <h2 class="text-white pb-2 fw-bold">Kullanıcı Ekleme </h2>
+                        <h5 class="text-white op-7 mb-2">Micro Görev Yöneitic Ekranı</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/aekle" method="post">
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="firstname" placeholder="Adı" required>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="lastname" placeholder="Soyadı" required>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="email" placeholder="E-mail" required
+                                autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="password" name="password" placeholder="Parola" required
+                                autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="password" name="password" placeholder="Parola Tekrar"
+                                required autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="telefon" placeholder="Telefon">
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" type="text" name="member" placeholder="Role">
+                                <option value="executive">Yönetici</option>
+                                <option value="auditor">Denetçi</option>
+                                <option value="responsible">Sorumlu</option>
+                            </select>
+                        </div>
+
+                        <button class="btn btn-primary" type="submit">
+                            Ekle
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Adi</th>
+                                <th>Soyadi</th>
+                                <th>Role</th>
+                                <th>Düzenleme</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in data %}
+                            <tr>
+                                <td>{{row[2]}}</td>
+                                <td><strong>{{row[3]}} </strong></td>
+                                <td>{{row[8]}}</td>
+                                <td>
+                                    <button class="btn btn-info" id="btnOpenForm"> Düzelt </button>
+                                    <button class="openButton" onClick="openForm()"><a href="/kduz">Edit</a></button>
+                                    <a class="btn btn-danger" href="#" title="delete" class="delete"
+                                        onclick="return confirm('Bu kullanıcıyı silmek istediğinizden eminmisiniz...')">Sil</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+{% if kduz %}
+<div class="content">
+    <div class="container col-md-12">
+        <div class="panel-header bg-primary-gradient">
+            <div class="page-inner py-5">
+                <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+                    <div>
+                        <h2 class="text-white pb-2 fw-bold">Kullanıcı Ekleme </h2>
+                        <h5 class="text-white op-7 mb-2">Micro Görev Yöneitic Ekranı</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-body">
+        <form method="POST">
+            <div class="form-group">
+                <td> {{ data1[0[2]] }} </td>
+                <input class="form-control" type="text" name="firstname" value={{data1[0][2]}} placeholder="Adı"
+                    required>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" name="lastname" value={{data1[0][3]}} placeholder="Soyadı"
+                    required>
+            </div>
+
+
+
+            <button class="btn btn-danger" type="submit"> Güncelle</button>
+        </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<td> {{ data1[0[2]] }} </td>
+{% endif %}
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+{% include 'includes/scripts.html' %}
+  <script>
+    $(document).ready(function() {
+      // Javascript method's body can be found in assets/js/demos.js
+      md.initDashboardPageCharts();
+
+    });
+  </script>
+
+
+
+{% endblock javascripts %}

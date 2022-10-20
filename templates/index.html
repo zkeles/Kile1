@@ -1,0 +1,65 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="content">
+
+	<div class="panel-header bg-primary-gradient">
+		<div class="page-inner py-5">
+			<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+				<div>
+					<h2 class="text-white pb-2 fw-bold">FIRIN ADI : {{ firinadi }}</h2>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="page-inner">
+
+		<!-- Card -->
+		<div class="row">
+			<div class="col-12 col-sm-12 ">
+				<div class="card">
+
+					<h2 class="card-title">Firin Satıs Raporlama</h2>
+	
+					<div class="right-text-tabs">
+						<!-- Tab panes -->
+						<div class="tab-content">
+							<div class="tab-pane active" id="info">
+								<p>Doksanlı yıllardan bu zamana bilişim sektöründe faklı
+									branşlarında edindiği birikim ve tecrübelerini VİPERA
+									çatısında birleştirmiş çalışma arkadaşlarıyız.</p>
+								<p>Bilgi Teknolojileri alanında yirmi beş yılını geçirmiş
+									bireyler olarak biz biliyoruz ki, işiniz ve
+									sorumluluklarınız ticari hayattaki en önemli
+									değerlerinizdir.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+	{% endblock content %}
+
+	<!-- Specific Page JS goes HERE  -->
+	{% block javascripts %}
+	{% include 'includes/scripts.html' %}
+
+
+	<script>
+
+	</script>
+
+	{% endblock javascripts %}

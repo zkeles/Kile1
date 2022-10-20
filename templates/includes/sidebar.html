@@ -1,0 +1,95 @@
+<!-- Sidebar -->
+
+<div class="sidebar sidebar-style-2">
+	<div class="sidebar-wrapper scrollbar scrollbar-inner">
+		<div class="sidebar-content">
+			<ul class="nav nav-primary">
+
+				<li class="nav-item {% if 'index' in segment %} active {% endif %} usrAdmin  usrAccess"
+					style="display:none;">
+					<a href="/kontrolpaneli"><i class="fas fa-home text-info"></i>
+						<p> Kontrol Paneli</p>
+					</a>
+
+				<li class="nav-item {% if 'index' in segment %} active {% endif %} usrAdmin usrNormal usrAccess"
+					style="display:none;">
+					<a href="/iskarta"><i class="fa flaticon-list text-info"></i>
+						<p> İKRAM ISKARTA FORMU</p>
+					</a>
+					<li class="nav-item {% if 'index' in segment %} active {% endif %} usrAdmin usrNormal usrAccess"
+					style="display:none;">
+					<a href="#"><i class="fa flaticon-tea-cup text-info"></i>
+						<p> YEMEK FORMU</p>
+					</a>
+					<li class="nav-item {% if 'index' in segment %} active {% endif %} usrAdmin usrNormal usrAccess"
+					style="display:none;">
+					<a href="#"><i class="fa flaticon-calendar text-info"></i>
+						<p> GÜNLÜK TAKİP  </p>
+					</a>
+				<li class="nav-item {% if 'index' in segment %} active {% endif %} usrAdmin  usrAccess"
+					style="display:none;">
+					<a data-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
+						<i class="fab fa-creative-commons-by text-info"></i>
+						<p> Yönetici Ekranları</p>
+						<span class="caret"></span>
+					</a>
+					<div class="collapse" id="dashboard" member="member">
+						<ul class="nav nav-collapse">
+							<li>
+								<!-- <a href="/">
+									<span class="sub-item"> Lokasyon Ekle & Düzelt</span>
+								</a> -->
+								<a href="/kekle">
+									<span class="sub-item"> Kullanıcı Ekle & Düzelt</span>
+								</a>
+
+							</li>
+						</ul>
+					</div>
+				</li>
+				
+				<li class="nav-item {% if 'index' in segment %} active {% endif %} usrAdmin usrAccess">
+					<span class="sidebar-mini-icon"><i class="fa fa-ellipsis-h"> </i> </span>
+
+				</li>
+
+
+				<li class="nav-item {% if 'index' in segment %} active {% endif %} usrAdmin  usrAccess"
+					style="display:none;">
+					<a data-toggle="collapse" href="#charts">
+						<i class="fas flaticon-web	text-danger fw-bold"></i>
+						<p>Raporlar</p>
+						<span class="caret"></span>
+					</a>
+					<div class="collapse" id="charts">
+						<ul class="nav nav-collapse">
+							<li class="nav-item {% if 'index' in segment %} active {% endif %} usrAdmin ">
+								<a href="/firinrapor">
+									<span class="sub-item">Fırın Satıs Raporu</span>
+								</a>
+							</li>
+							<li class="nav-item {% if 'index' in segment %} active {% endif %} usrAdmin ">
+								<a href="/txtrapor">
+									<span class="sub-item">Txt Raporu</span>
+								</a>
+							</li>
+							<li class="nav-item {% if 'index' in segment %} active {% endif %} usrAdmin ">
+								<a href="/xlssend">
+									<span class="sub-item">Firin Raporu</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+
+				<li class="mx-4 mt-2">
+					<a target="_blank" href="https://www.vipera.com.tr" class="btn btn-danger btn-block">
+						<span class="btn-label mr-2"> <i class="fa fa-cog fa-spin fa-3x fa-fw"></i> </span>Kile Fırın Görev</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+
+<!-- End Sidebar -->

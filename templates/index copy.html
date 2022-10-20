@@ -1,0 +1,84 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Tables {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+
+<div class="row">
+    <div class="col-lg-7 col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Kivenos</h4>
+                <p class="category">Kişisel kevileri koruma konuna uygun yazılım hakkında</p>
+            </div>
+            <div class="card-content">
+                <div class="row">
+                    <div class="left-vertical-tabs">
+                        <ul class="nav nav-stacked" role="tablist">
+                            <li class="active">
+                                <a href="#info" role="tab" data-toggle="tab">
+                                     Bilgi
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#description" role="tab" data-toggle="tab">
+                                    Kivenos
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#concept" role="tab" data-toggle="tab">
+                                    Amacımız
+                                </a>
+                            </li>
+                            <li>
+                               <a href="#support" role="tab" data-toggle="tab">
+                                Temel İlkelerimiz
+                               </a>
+                            </li>
+                            <li>
+                               <a href="#extra" role="tab" data-toggle="tab">
+                                Neler Yapıyoruz
+                               </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="right-text-tabs">
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="info">
+                                <p>Doksanlı yıllardan bu zamana bilişim sektöründe faklı branşlarında edindiği birikim ve tecrübelerini VİPERA çatısında birleştirmiş çalışma arkadaşlarıyız.</p>
+                                <p>Bilgi Teknolojileri alanında yirmi beş yılını geçirmiş bireyler olarak biz biliyoruz ki, işiniz ve sorumluluklarınız ticari hayattaki en önemli değerlerinizdir.</p>
+                            </div>
+                            <div class="tab-pane" id="description">
+                                <p>Size yol göstermek değil, sizinle birlikte yola çıkmak, Kurumsal misyonunuzun bilinci ile temel prensip ve ilkelerden ayrılmadan, kurumumuzun varmak istediği vizyona ulaşmasına katkıda bulunmaktır.</p>
+                                <p>Konusunda deneyimli uzmanlarımızla gerçekleştirdiğimiz danışmanlık ve denetim hizmetlerimiz, kurumunuzda verimliliğin ve karlılığın artmasını, her şartta iş devamlılığının sağlanmasını, yönetimin hızlı ve doğru karar almasını hedeflemektedir.</p>
+                            </div>
+                            <div class="tab-pane" id="concept">
+                                <p>Temel İlkelerimiz; Kurumsal ve bireysel değerlere sahip çıkarak, gizlilik, doğruluk ve sadakat temelli, nitelikli ve müşteri odaklı olmaktır.</p>
+                                <p> </p>
+                            </div>
+                            <div class="tab-pane" id="support">
+                                <p>Kurumların bilgiye ve teknolojiye bağımlılığı, Bilişim sistemlerinin dağıtık ve dinamik yapısı birtakım zafiyet ve tehditleri meydana getirmektedir.</p>
+                                <p>Bu durum kurumlarda bilgi ve iletişim teknolojileri stratejik yönetimini, Kurumsal Kalite Yönetimini ve Bilgi Güvenliğini, iş sürekliliği, kurumun varlığı ve itibarı açısından yaşamsal öneme taşımaktadır.</p>
+                            </div>
+                            <div class="tab-pane" id="extra">
+                                <p>VİPERA olarak biz, kurumun varlığı ve itibarının korunması bilinci ile birlikte yasa ve yönetmeliklerin kurumlara yüklediği sorumluluklar açısından da kritik öneme sahip konular üzerine detaylandırdığımız danışmanlık ve denetim hizmetlerini gerçekleştirmekteyiz. </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}  

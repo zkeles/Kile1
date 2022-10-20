@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<style>
+  #contact_form {
+
+    display: inline-block;
+    background-color: #fff;
+    border-radius: 20px;
+    height: auto;
+    padding: 15px 38px;
+    margin: 20% auto;
+    margin-left: auto;
+    margin-right: auto;
+
+  }
+</style>
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../static/assets/css/owl.carousel.min.css">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="../static/assets/css/bootstrap.min.css">
+  <!-- Style -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
+  <title>Giriş</title>
+
+</head>
+
+<body>
+
+
+  <div class="content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <br>
+          <br>
+          <br>
+          <br>
+          <img src="../static/assets/img/Microgorevlogin.svg" alt="Image" class="img-fluid">
+        </div>
+
+        <div class="col-md-6 contents">
+          <div class="row justify-content-center">
+            <div class="col-md-8">
+              <div class="mb-4">
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <h2> Kile'ye Hoş Geldiniz</h2>
+                <p class="mb-4">
+                <h4>Giriş </h4>
+                </p>
+              </div>
+              <form action="/submit" method="post">
+                <div class="form-group first">
+                  <label for="email">e-mail</label>
+                  <input name="email" value="" type="text" class="form-control" required>
+                </div>
+                <div class="form-group last mb-4">
+                  <label for="password">Password</label>
+                  <input name="password" type="password" class="form-control" id="password">
+                </div>
+                <input type="submit" value="Giriş" class="btn btn-block btn-primary">
+              </form>
+              <a href="/forgot">Şifrenizi mi unuttunuz?</a>
+              <br>
+              <br>
+              <br>
+
+              <div class="container">
+
+                <!-- Trigger the modal with a button -->
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Yeni
+                  Kayıt</button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" role="dialog">
+                  <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <form id="contact_form" action="/reg" method="post" onsubmit="javascript:alert('Sisteme kayıt için mil gönderilmistir!');" >
+                          <h4 class="modal-title">Kayıt için lütfen e-mail adresini giriniz</h4>
+                          <br>
+                          <div class="form-group first">
+                            <input placeholder="E-mail adresi" size=100 id="email" name="email" value="" type="text"
+                              class="form-control" required>
+                          </div>
+                          <input type="submit" value="gonder" id="email" class="btn btn-block btn-danger" >
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+  </div>
+
+
+  <script src="../static/assets/js/loginjquery-3.3.1.min.js"></script>
+  <script src="../static/assets/js/popper.min.js"></script>
+  <script src="../static/assets/js/loginbootstrap.min.js"></script>
+  <script src="../static/assets/js/loginmain.js"></script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+
+        <title>Vipera - Registration Wizard</title>
+
+        <!-- CSS -->
+ 
+        <link rel="stylesheet" href="../static/reg_assets/bootstrap/css/bootstrap.min.css">
+      
+		<link rel="stylesheet" href="../static/reg_assets/css/form-elements.css">
+        <link rel="stylesheet" href="../static/reg_assets/css/style.css">
+
+      
+    </head>
+
+<style>
+.container-fluid {
+  width: 50%;
+  padding-right: 10;
+  padding-left: auto;
+  margin-right: auto;
+  margin-left: auto;
+}
+</style>
+<div class="container-fluid">
+    <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+        <div class="mb-3">
+            <label class="form-label" for="ad">Ad</label>
+            <input class="form-control" id="ad" type="text" placeholder="Ad" data-sb-validations="required" />
+            <div class="invalid-feedback" data-sb-feedback="ad:required">Ad is required.</div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="soyad">Soyad</label>
+            <input class="form-control" id="soyad" type="text" placeholder="Soyad" data-sb-validations="required" />
+            <div class="invalid-feedback" data-sb-feedback="soyad:required">Soyad is required.</div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="emailAdresi">Email Adresi</label>
+            <input class="form-control" id="emailAdresi" type="email" placeholder="Email Adresi" data-sb-validations="required,email" />
+            <div class="invalid-feedback" data-sb-feedback="emailAdresi:required">Email Adresi is required.</div>
+            <div class="invalid-feedback" data-sb-feedback="emailAdresi:email">Email Adresi Email is not valid.</div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="parola">Parola</label>
+            <input class="form-control" id="parola" type="text" placeholder="Parola" data-sb-validations="required" />
+            <div class="invalid-feedback" data-sb-feedback="parola:required">Parola is required.</div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="parolaTekrar">Parola Tekrar</label>
+            <input class="form-control" id="parolaTekrar" type="text" placeholder="Parola Tekrar" data-sb-validations="required" />
+            <div class="invalid-feedback" data-sb-feedback="parolaTekrar:required">Parola Tekrar is required.</div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="firmaAdi">Firma Adi</label>
+            <input class="form-control" id="firmaAdi" type="text" placeholder="Firma Adi" data-sb-validations="required" />
+            <div class="invalid-feedback" data-sb-feedback="firmaAdi:required">Firma Adi is required.</div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="firmaKisaAdi">Firma Kısa Adı</label>
+            <input class="form-control" id="firmaKisaAdi" type="text" placeholder="Firma Kısa Adı" data-sb-validations="required" />
+            <div class="invalid-feedback" data-sb-feedback="firmaKisaAdi:required">Firma Kısa Adı is required.</div>
+        </div>
+        <div class="d-none" id="submitSuccessMessage">
+            <div class="text-center mb-3">
+                <div class="fw-bolder">Form submission successful!</div>
+                <p>To activate this form, sign up at</p>
+                <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+            </div>
+        </div>
+        <div class="d-none" id="submitErrorMessage">
+            <div class="text-center text-danger mb-3">Error sending message!</div>
+        </div>
+        <div class="d-grid">
+            <button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Submit</button>
+        </div>
+    </form>
+</div>
+<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>

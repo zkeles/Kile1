@@ -1,0 +1,207 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="content">
+    <div class="container col-md-12">
+        <div class="panel-header bg-primary-gradient">
+            <div class="page-inner py-5">
+                <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+                    <div>
+                        <h2 class="text-white pb-2 fw-bold">Kullanıcı Ekleme </h2>
+                        <h5 class="text-white op-7 mb-2">Micro Görev Yöneitic Ekranı</h5>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex align-items-center">
+                            <h4 class="card-title" style="text-align:justify">Yeni Kullanıcı Bilgilerini Doldurunuz</h4>
+                        </div>
+                        <div class="card-body">
+                            <form action="/k1ekle" method="post">
+                                <div class="form-group">
+                                    <input class="form-control" type="text" name="firstname" placeholder="Adı" required>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" type="text" name="lastname" placeholder="Soyadı"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" type="text" name="email" placeholder="E-mail" required
+                                        autocomplete="off">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" id="password" name="password" type="password" pattern="^\S{4,}$"
+                                        onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Parolaniz minumum dört karekter olmalıdır.' : ''); if(this.checkValidity()) form.password_two.pattern = this.value;"
+                                        placeholder="Parola" required>
+
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" id="password_two" name="password_two" type="password" pattern="^\S{4,}$"
+                                        onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Lütfen ayni parolayı yaziniz' : '');"
+                                        placeholder="Parol Tekrar " required>
+
+                                </div>
+      
+                                <div class="form-group">
+                                    <input class="form-control" type="text" name="phone" placeholder="Telefon">
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control" type="text" name="firin_id"  placeholder="Role">
+                                     
+                                        <option >Firin Seciniz</option>
+                                        {% for row in lokasyon %}
+                                        
+                                        <option value="{{row[0]}}">{{row[1]}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <button class="btn btn-info btn-round" type="submit">
+                                    Ekle
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex align-items-center">
+                            <h4 class="card-title"> Kullanıcı Listesi</h4>
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!-- Modal -->
+
+
+                        <div class="table-responsive">
+                            <table id="add-row" class="display table table-striped table-hover">
+                                <thead>
+
+                                    <tr>
+                                        <th>Adı</th>
+                                        <th>Soyadı</th>
+                                        <th>Frın Adı</th>
+                                        <th style="width: 5%">Action</th>
+                                    </tr>
+
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>Adı</th>
+                                        <th>Soyadı</th>
+                                        <th>Fırın Adı</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    {% for row in data %}
+                                    <tr>
+
+                                        <td>{{row[2]}}</td>
+                                        <td>{{row[3]}}</td>
+                                        <td>{{row[9]}}</td>
+                                        <td>
+                                            <div class="form-button-action">
+                                                <a onclick="location.href='/kduz/{{row[0]}}' " type="button"
+                                                    data-toggle="tooltip" title=""
+                                                    class="btn btn-link btn-primary btn-lg"
+                                                    data-original-title="Kullanıcı Düzenle">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                    
+                                                <a onclick="location.href='/passreset/{{row[0]}}'" type="button" 
+                                                data-toggle="tooltip" title=""
+                                                class="btn btn-link btn-primary btn-lg"
+                                                data-original-title="Parola Resetleme">
+                                                <i class="fa fa-key"></i>
+                                            </a>
+  
+                                   
+                                                <a type="button" data-toggle="tooltip" title=""
+                                                    class="btn btn-link btn-danger delete"
+                                                    data-original-title="Kullanıcı Silme" href='/ksil/{{row[0]}}'
+                                                    onclick="return confirm('Bu kullanıcıyı silmek istediğinizden eminmisiniz...')">
+                                                    <i class="fa fa-times"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+{% include 'includes/scripts.html' %}
+
+<script>
+    $(document).ready(function () {
+        // Javascript method's body can be found in assets/js/demos.js
+        md.initDashboardPageCharts();
+
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('#basic-datatables').DataTable({
+        });
+
+        $('#multi-filter-select').DataTable({
+            "pageLength": 5,
+            initComplete: function () {
+                this.api().columns().every(function () {
+                    var column = this;
+                    var select = $('<select class="form-control"><option value=""></option></select>')
+                        .appendTo($(column.footer()).empty())
+                        .on('change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+
+                            column
+                                .search(val ? '^' + val + '$' : '', true, false)
+                                .draw();
+                        });
+
+                    column.data().unique().sort().each(function (d, j) {
+                        select.append('<option value="' + d + '">' + d + '</option>')
+                    });
+                });
+            }
+        });
+
+        // Add Row
+        $('#add-row').DataTable({
+            "pageLength": 4,
+        });
+
+    });
+</script>
+{% endblock javascripts %}

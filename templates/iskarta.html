@@ -1,0 +1,144 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="content">
+
+	<div class="panel-header bg-primary-gradient">
+		<div class="page-inner py-5">
+			<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+				<div>
+					<h2 class="text-white pb-2 fw-bold">FIRIN ADI : {{ firinadi }}</h2>
+					<h3 class="text-white pb-2 fw-bold">IKRAM & ISKARTA GIRISI</h3>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<br>
+
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-body">
+						<form action="/iskartaekle" method="post">
+
+							<div class="form-group">
+								<div class="col-md-12">
+									<div class="card">
+										<div class="card-body">
+											<label>
+												<h4> Tarih seciniz</h4>
+											</label>
+											<input class="form-control" type="date" id="date" name="date" value="Today">
+										</div>
+									</div>
+								</div>
+								<input oninvalid="this.setCustomValidity('Adet Giriniz')" class="form-control"
+									type="number" name="adet" placeholder="Adet" required>
+							</div>
+							<select oninvalid="this.setCustomValidity('Ürün Seçiniz')"
+								oninput="this.setCustomValidity('')" required name="urun"
+								class="form-control populate selectpicker search-choice">
+								<option value="">Ürün Seçiniz</option>
+								{% for row in urun %}
+								<option value="{{row[1]}}">{{row[0]}} {{row[1]}}</option>
+								{% endfor %}
+							</select>
+							<br>
+							<button class="btn btn-primary" type="submit"> Ekle</button>
+							<br>
+
+						</form>
+
+					</div>
+				</div>
+			</div>
+
+
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-body">
+						<form action="/iskartagetir" method="post">
+
+							<div class="card-body">
+								<label>
+									<h4> Tarih seciniz</h4>
+								</label>
+								<input class="form-control" type="date" id="tdate" name="tdate" value="Today">
+							</div>
+							<button class="btn btn-primary" type="submit"> Getir</button>
+
+							<br>
+							<br>
+							<table class="table table-bordered table-hover">
+								<thead>
+									<label> {{ date }} </label>
+									<tr>
+										<th>Ürün Adi</th>
+										<th>Adet</th>
+										<th>Operations</th> 
+									</tr>
+								</thead>
+								<tbody>
+									{% for row in list %}
+									<tr>
+
+										<td><strong>{{row[5]}} </strong></td>
+										<td>{{row[4]}}</td>
+									<td>
+								<a class="btn btn-danger" href="/Csil/{{row[0]}}"> Sil </a>
+								<a class="btn btn-primary" href="/Csil/{{row[0]}}"> Düzlet </a> 
+							</td> 
+									</tr>
+									{% endfor %}
+								</tbody>
+
+							</table>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script>
+	var date = new Date();
+	var day = date.getDate();
+	var month = date.getMonth() + 1;
+	var year = date.getFullYear();
+
+	if (month < 10) month = "0" + month;
+	if (day < 10) day = "0" + day;
+
+	var today = year + "-" + month + "-" + day;
+
+	document.getElementById("date").value = today
+	document.getElementById("tdate").value = today;
+</script>
+
+<script>
+	$(document).ready(function () {
+		// Javascript method's body can be found in assets/js/demos.js
+		md.initDashboardPageCharts();
+
+	});
+</script>
+
+{% endblock javascripts %}
